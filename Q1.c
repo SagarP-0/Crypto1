@@ -18,12 +18,18 @@ int main(int argc, char *argv[]){
     FILE *fp = fopen(argv[1], "r"); // r in reading moide
     if(fp == NULL){
         printf("Couldnt' open file %s\n", argv[1]); // as mentioned argv 1 is the file name 
+        return 1; // break the loop in case of file opening error
     }
 
     //checking char and counting
     while(( ch = fgetc(fp)) != EOF){
         //loop till end of file
         if ((isalpha(ch))){
+
+            // MISSING TO_UPPER COULD CASE INDEXING PROBLEMS!!!
+            //we first convert all to upper in range 65-91 even the small letters
+            //suppose e = 101 then E = 69, THEN 69 - A(65) = 4 (used as ind4ex)
+            ch = toupper(ch);
             letter_count[ch - 'A']++; //updating the letter count bucjket
             total_letters++; //updating total count
         }
@@ -31,13 +37,26 @@ int main(int argc, char *argv[]){
 
     fclose(fp);
 
+
+    //proof checking the freq and count along with counts CAN BE DISREGARDED
+    int char_count = 0; //to check for total characters
+    double freq_total = 0; //to check percentage total
+
     //printing data
     printf("Letter  Count   Frequency\n");
     for(int i=0; i<26; i++){
         double freq = (double)letter_count[i] / total_letters * 100.0; //calc using double(floating points)
         //freq = freq*100.0; //dopesnt 
-        printf("%c  %d  %.2f\n",'A'+i, letter_count[i],freq);
+        printf("%c  %d  %.2f\n",'A'+i, letter_count[i],freq); 
+
+        //dummy check 
+        char_count += letter_count[i];
+        freq_total += freq;
     }
+
+    printf("\n\nDummy checks\n");
+    printf("Char_count=%d, Total_letters=%ld,\nFreq%%= %.2f\n",char_count,total_letters,freq_total); //should be equal and 100%
+
 
     return 0;
 
