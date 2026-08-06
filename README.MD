@@ -1,1 +1,50 @@
-Just testing git init out
+# Assignment 1 Cryptology6160
+
+##Question 1:
+
+Implemented a simple frequency analyzer in C. Text extracted from the wikipedia article on "Happiness" using 
+"https://quickcalculators.in/wikipedia-plain-text-extractor/" and placed in "happiness.txt" in the same folder.
+
+TO COMPILE:
+gcc Q1.C -o <object_file_name>
+./<object_file_name> <filename(in same folder)>
+
+TO COMPILE <happiness.txt>:
+
+>>gcc Q1.c -o Q1
+>>./Q1 happiness.txt
+
+OUTPUT: 
+Letter  Count   Frequency
+A  2524  7.86
+B  389  1.21
+C  1056  3.29
+D  1088  3.39
+E  3987  12.41
+F  776  2.42
+G  634  1.97
+H  1609  5.01
+I  2748  8.55
+J  55  0.17
+K  118  0.37
+L  1367  4.25
+M  715  2.23
+N  2407  7.49
+O  2298  7.15
+P  1118  3.48
+Q  32  0.10
+R  1686  5.25
+S  2566  7.99
+T  2667  8.30
+U  893  2.78
+V  420  1.31
+W  354  1.10
+X  84  0.26
+Y  503  1.57
+Z  37  0.12
+
+Dummy checks
+Char_count=32131, Total_letters=32131,
+Freq%= 100.00
+
+
