@@ -105,7 +105,20 @@ def recover_key(cipher, key_len):
         key += chr(shift + ord('A'))
     return key
 
+#testing keys and displayingg
 key_len = est_key_len(ciphertext, 30)
 key = recover_key(ciphertext , key_len)
-
 print("Recovcered key: ",key)
+
+def vigenere_decrypt(cipher, key):
+    plaintext = ""
+    for i in range(len(cipher)):
+        c = cipher[i]
+        k = key[i % len(key)]
+        shift = ord(k) - ord('A')
+        p = (ord(c) - ord('A') - shift) % 26
+        plaintext += chr(p + ord('A'))
+    return plaintext
+
+plaintext = vigenere_decrypt(ciphertext, key)
+print("Decrypted text:", plaintext)
