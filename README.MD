@@ -1,6 +1,6 @@
 # Assignment 1 Cryptology6160
 
-<h1> Question 1: 
+<h1> Question 1: </h1>
 
 Implemented a simple frequency analyzer in C. Text extracted from the wikipedia article on "Happiness" using 
 "https://quickcalculators.in/wikipedia-plain-text-extractor/" and placed in "happiness.txt" in the same folder.
@@ -49,7 +49,7 @@ Freq%= 100.00
 
 Note: output copy pasted from terminal so may looked clumped in readme file. 
 
-<h1>Question 2:
+<h1>Question 2:</h1>
 
 TO COMPILE:
 >>python3 Q2.py
