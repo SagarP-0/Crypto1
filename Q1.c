@@ -54,6 +54,7 @@ int main(int argc, char *argv[]){
         freq_total += freq;
     }
 
+    //dummy checks for peace of mind
     printf("\n\nDummy checks\n");
     printf("Char_count=%d, Total_letters=%ld,\nFreq%%= %.2f\n",char_count,total_letters,freq_total); //should be equal and 100%
 
