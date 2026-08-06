@@ -21,7 +21,7 @@ def ioc(text):
         numerator += count * (count-1) 
 
     #basically uisong the ioc formula given in the tutorial 
-    denominator = n * n-1
+    denominator = n * (n-1)
     ic = 26 * numerator/denominator
     return ic
     #the  ioc calc return around 1.7 for english text and 1.0 for random text
@@ -55,3 +55,57 @@ def est_key_len(cipher, max_len):
 
     return best_len 
 
+#recovering the shift for one slice using cosine similarity 
+def best_shit_for_slice(slice_text):
+    best_shift = 0
+    best_simil = -1 #cosine simliarity begins from -1 to 1 so startting wtih min
+
+    for shift in range(26): #decrypting each slice assuming the shift is 'shift"
+        freq = [0] * 26
+        for ch in slice_text:
+            p = (ord(ch) - ord('A') - shift) % 26
+            freq[p] += 1
+
+        total = len(slice_text)
+        rel_freq = []
+        for count in freq:
+            rel_freq.append((count/total) *100)
+
+        #for calcing cosine similarityu
+        dot_product = 0
+        for i in range(26):
+            dot_product += rel_freq[i] * english_freq[i]
+
+        mag_relative=0 
+        for value in rel_freq:
+            mag_relative += value*value
+        mag_relative = mag_relative **0.5 
+
+        mag_english= 0
+        for value in english_freq:
+            mag_english+= value*value
+        mag_english = mag_english ** 0.5
+
+        if mag_relative == 0 or mag_english == 0:
+            simil = 0 
+        else:
+            simil = dot_product/(mag_english*mag_relative)
+
+        if simil>best_simil:
+            best_simil = simil
+            best_shift= shift
+
+    return best_shift
+
+def recover_key(cipher, key_len):
+    key = ""
+    for start in range(key_len):
+        slice_text = cipher[start::key_len]
+        shift = best_shit_for_slice(slice_text) 
+        key += chr(shift + ord('A'))
+    return key
+
+key_len = est_key_len(ciphertext, 30)
+key = recover_key(ciphertext , key_len)
+
+print("Recovcered key: ",key)
